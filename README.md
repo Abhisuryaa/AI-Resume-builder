@@ -2,6 +2,8 @@
 
 An AI-like resume builder that helps users create professional resumes tailored to specific job descriptions. The application uses smart algorithms to analyze job descriptions and optimize resumes to highlight relevant skills and experience.
 
+See demo at: [your-demo-link-here]
+
 ## Features
 
 - User-friendly form for entering resume information
