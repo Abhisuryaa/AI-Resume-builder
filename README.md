@@ -1,13 +1,13 @@
 # AI Resume Builder
 
-An AI-powered resume builder that helps users create professional resumes tailored to specific job descriptions. The application uses AI to analyze job descriptions and optimize resumes to highlight relevant skills and experience.
+An AI-like resume builder that helps users create professional resumes tailored to specific job descriptions. The application uses smart algorithms to analyze job descriptions and optimize resumes to highlight relevant skills and experience.
 
 ## Features
 
 - User-friendly form for entering resume information
-- AI-powered resume generation using OpenAI and HuggingFace
+- Smart resume generation using built-in algorithms
 - Responsive design that works on desktop and mobile
-- Fallback to template-based generation when AI services are unavailable
+- Template-based generation with keyword highlighting
 - Preview and download options for generated resumes
 
 ## Technologies Used
@@ -16,8 +16,6 @@ An AI-powered resume builder that helps users create professional resumes tailor
 - React
 - TypeScript
 - Tailwind CSS
-- OpenAI API
-- HuggingFace Inference API
 
 ## Getting Started
 
@@ -41,20 +39,14 @@ An AI-powered resume builder that helps users create professional resumes tailor
    yarn install
    ```
 
-3. Create a `.env.local` file in the root directory with your API keys:
-   ```
-   OPENAI_API_KEY=your_openai_api_key
-   HUGGINGFACE_API_KEY=your_huggingface_api_key
-   ```
-
-4. Start the development server:
+3. Start the development server:
    ```bash
    npm run dev
    # or
    yarn dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
 ## Deployment
 
@@ -74,10 +66,6 @@ The easiest way to deploy this application is using Vercel:
    ```
 
 4. Follow the prompts to deploy your application
-5. Add your API keys as environment variables in the Vercel dashboard:
-   - Go to your project settings
-   - Navigate to the "Environment Variables" tab
-   - Add `OPENAI_API_KEY` and `HUGGINGFACE_API_KEY` with your API keys
 
 ### Alternative Deployment Options
 
