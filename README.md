@@ -2,7 +2,7 @@
 
 An AI-like resume builder that helps users create professional resumes tailored to specific job descriptions. The application uses smart algorithms to analyze job descriptions and optimize resumes to highlight relevant skills and experience.
 
-See demo at: [your-demo-link-here]
+See demo at: https://ai-resume-builder-4x7w.vercel.app/
 
 ## Features
 
