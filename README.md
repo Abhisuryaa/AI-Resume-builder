@@ -96,4 +96,4 @@ The AI functionality works completely offline with no external API dependencies,
 
 ## 📄 License
 
-MIT 
+MIT "# AI-Resume-builder" 
