@@ -1,99 +1,96 @@
 # AI Resume Builder
 
-A modern, AI-powered resume builder that helps you create and optimize resumes tailored to specific job descriptions.
+An AI-powered resume builder that helps users create professional resumes tailored to specific job descriptions. The application uses AI to analyze job descriptions and optimize resumes to highlight relevant skills and experience.
 
-![AI Resume Builder Screenshot](https://via.placeholder.com/800x400?text=AI+Resume+Builder+Screenshot)
+## Features
 
-## 🌟 Live Demo
+- User-friendly form for entering resume information
+- AI-powered resume generation using OpenAI and HuggingFace
+- Responsive design that works on desktop and mobile
+- Fallback to template-based generation when AI services are unavailable
+- Preview and download options for generated resumes
 
-Check out the live demo: [https://ai-resume-builder-demo.vercel.app](https://ai-resume-builder-demo.vercel.app)
-
-## ✨ Features
-
-- **Create Resume**: Generate a professional resume based on your information and target job description
-- **Optimize Resume**: Improve your existing resume to better match a job description
-- **Modern UI**: Clean, responsive interface with glassmorphic design elements
-- **No API Key Required**: Uses built-in AI technology that works completely offline
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ and npm
-
-### Installation
-
-1. Clone the repository
-   ```
-   git clone https://github.com/yourusername/ai-resume-builder.git
-   cd ai-resume-builder
-   ```
-
-2. Install dependencies
-   ```
-   npm install
-   ```
-
-### Running the Application
-
-```
-npm run dev
-```
-
-The application will be available at [http://localhost:3000](http://localhost:3000).
-
-## 🔧 How It Works
-
-This application uses built-in AI algorithms to:
-
-1. Generate professional resumes based on your personal information and job details
-2. Optimize existing resumes to better match specific job descriptions
-3. Highlight relevant skills and experience that match job requirements
-4. Format resumes in a clean, professional style
-
-The AI functionality works completely offline with no external API dependencies, ensuring:
-- Privacy: Your data never leaves your computer
-- Reliability: No API rate limits or connectivity issues
-- Speed: Instant resume generation without waiting for API responses
-
-## 🛠️ Technologies Used
+## Technologies Used
 
 - Next.js 14
 - React
 - TypeScript
 - Tailwind CSS
-- Zod for form validation
-- React Hook Form
+- OpenAI API
+- HuggingFace Inference API
 
-## 📱 Screenshots
+## Getting Started
 
-<details>
-<summary>View Screenshots</summary>
+### Prerequisites
 
-### Home Page
-![Home Page](https://via.placeholder.com/800x400?text=Home+Page)
+- Node.js 18.17 or later
+- npm or yarn
 
-### Create Resume Form
-![Create Resume Form](https://via.placeholder.com/800x400?text=Create+Resume+Form)
+### Installation
 
-### Generated Resume
-![Generated Resume](https://via.placeholder.com/800x400?text=Generated+Resume)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/AI-Resume-builder.git
+   cd AI-Resume-builder
+   ```
 
-### Optimize Resume Form
-![Optimize Resume Form](https://via.placeholder.com/800x400?text=Optimize+Resume+Form)
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-</details>
+3. Create a `.env.local` file in the root directory with your API keys:
+   ```
+   OPENAI_API_KEY=your_openai_api_key
+   HUGGINGFACE_API_KEY=your_huggingface_api_key
+   ```
 
-## 🚀 Deployment
+4. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## Deployment
 
 ### Deploying to Vercel
 
-1. Fork this repository
-2. Sign up for a [Vercel](https://vercel.com) account
-3. Create a new project and import your GitHub repository
-4. Keep the default settings and click "Deploy"
-5. Your application will be live at `https://your-project-name.vercel.app`
+The easiest way to deploy this application is using Vercel:
 
-## 📄 License
+1. Create an account on [Vercel](https://vercel.com) if you don't have one
+2. Install the Vercel CLI:
+   ```bash
+   npm install -g vercel
+   ```
 
-MIT "# AI-Resume-builder" 
+3. Run the following command in the project directory:
+   ```bash
+   vercel
+   ```
+
+4. Follow the prompts to deploy your application
+5. Add your API keys as environment variables in the Vercel dashboard:
+   - Go to your project settings
+   - Navigate to the "Environment Variables" tab
+   - Add `OPENAI_API_KEY` and `HUGGINGFACE_API_KEY` with your API keys
+
+### Alternative Deployment Options
+
+You can also deploy this application to other platforms like:
+
+- Netlify
+- AWS Amplify
+- GitHub Pages (with some additional configuration)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

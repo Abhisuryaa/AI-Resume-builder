@@ -2,13 +2,24 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { HfInference } from '@huggingface/inference';
 
-// Initialize the OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Don't initialize the clients during build time
+let openai: OpenAI | null = null;
+let hf: HfInference | null = null;
 
-// Initialize the HuggingFace client
-const hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
+// Initialize clients only when the function is called
+const getOpenAIClient = () => {
+  if (!openai && typeof process.env.OPENAI_API_KEY === 'string' && process.env.OPENAI_API_KEY.length > 0) {
+    openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+  return openai;
+};
+
+const getHFClient = () => {
+  if (!hf && typeof process.env.HUGGINGFACE_API_KEY === 'string' && process.env.HUGGINGFACE_API_KEY.length > 0) {
+    hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
+  }
+  return hf;
+};
 
 export async function POST(request: Request) {
   try {
@@ -23,39 +34,46 @@ export async function POST(request: Request) {
       );
     }
 
-    try {
-      // First try using OpenAI
-      const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "system",
-            content: "You are a professional resume writer. Generate a professional resume in HTML format with modern styling."
-          },
-          {
-            role: "user",
-            content: `Create a resume for:
-              Name: ${fullName}
-              Email: ${email}
-              Phone: ${phone}
-              Desired Job Title: ${jobTitle}
-              Job Description: ${jobDescription}
-              Experience: ${experience}
-              Education: ${education}
-              Skills: ${skills}
-              
-              Please format it as an HTML document with embedded CSS for styling. Make it professional and modern looking.`
-          }
-        ]
-      });
-
-      return NextResponse.json({ resume: completion.choices[0].message.content });
-    } catch (openaiError) {
-      console.error('OpenAI Error:', openaiError);
-      
-      // Fallback to HuggingFace if OpenAI fails
+    // Try OpenAI if available
+    const openaiClient = getOpenAIClient();
+    if (openaiClient) {
       try {
-        const response = await hf.textGeneration({
+        const completion = await openaiClient.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content: "You are a professional resume writer. Generate a professional resume in HTML format with modern styling."
+            },
+            {
+              role: "user",
+              content: `Create a resume for:
+                Name: ${fullName}
+                Email: ${email}
+                Phone: ${phone}
+                Desired Job Title: ${jobTitle}
+                Job Description: ${jobDescription}
+                Experience: ${experience}
+                Education: ${education}
+                Skills: ${skills}
+                
+                Please format it as an HTML document with embedded CSS for styling. Make it professional and modern looking.`
+            }
+          ]
+        });
+
+        return NextResponse.json({ resume: completion.choices[0].message.content });
+      } catch (openaiError) {
+        console.error('OpenAI Error:', openaiError);
+        // Continue to next method if OpenAI fails
+      }
+    }
+    
+    // Try HuggingFace if available
+    const hfClient = getHFClient();
+    if (hfClient) {
+      try {
+        const response = await hfClient.textGeneration({
           model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
           inputs: `Create a professional resume in HTML format with modern styling for:
             Name: ${fullName}
@@ -79,12 +97,14 @@ export async function POST(request: Request) {
         return NextResponse.json({ resume: response.generated_text });
       } catch (hfError) {
         console.error('HuggingFace Error:', hfError);
-        
-        // If both APIs fail, fall back to the local implementation
-        const generatedResume = generateResumeHTML(fullName, email, phone, jobTitle, jobDescription, experience, education, skills);
-        return NextResponse.json({ resume: generatedResume });
+        // Continue to local implementation if HuggingFace fails
       }
     }
+    
+    // Fall back to local implementation if both APIs are unavailable or fail
+    const generatedResume = generateResumeHTML(fullName, email, phone, jobTitle, jobDescription, experience, education, skills);
+    return NextResponse.json({ resume: generatedResume });
+    
   } catch (error) {
     console.error('Error generating resume:', error);
     return NextResponse.json({ error: 'Failed to generate resume' }, { status: 500 });
