@@ -1,0 +1,281 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Color palette */
+  --sea-green: #00916E;
+  --dark-purple: #1C0B19;
+  --columbia-blue: #D6EDFF;
+  --uranian-blue: #ACD7EC;
+  --vista-blue: #8B95C9;
+  
+  /* Turquoise to peach gradient colors */
+  --turquoise: #30BFBF;
+  --sky-blue: #87CEEB;
+  --pale-blue: #B8E1FF;
+  --cream: #FFF8DC;
+  --peach: #FFCBA4;
+  --coral: #FF8C69;
+  
+  /* Neutral colors */
+  --neutral-lightest: #F8F9FA;
+  --neutral-light: #E9ECEF;
+  --neutral-medium: #DEE2E6;
+  --neutral-dark: #CED4DA;
+  
+  /* Text colors */
+  --text-primary: #1C0B19;
+  --text-secondary: rgba(28, 11, 25, 0.8);
+  --text-tertiary: rgba(28, 11, 25, 0.6);
+}
+
+body {
+  background-color: white;
+  color: var(--text-primary);
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-[#30BFBF] to-[#87CEEB] hover:from-[#30BFBF]/90 hover:to-[#87CEEB]/90 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-r from-[#87CEEB] to-[#B8E1FF] hover:from-[#87CEEB]/90 hover:to-[#B8E1FF]/90 text-[#1C0B19] font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1;
+  }
+  
+  .btn-accent {
+    @apply bg-gradient-to-r from-[#FF8C69] to-[#FFCBA4] hover:from-[#FF8C69]/90 hover:to-[#FFCBA4]/90 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1;
+  }
+  
+  .input-field {
+    @apply w-full p-3 border border-[#B8E1FF]/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#30BFBF]/50 focus:border-transparent transition-all duration-200 bg-white bg-opacity-70 backdrop-blur-sm;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--neutral-medium);
+    background-color: rgba(255, 255, 255, 0.7);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: var(--turquoise);
+    box-shadow: 0 0 0 2px rgba(48, 191, 191, 0.2);
+  }
+
+  .gradient-title {
+    @apply font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#30BFBF] via-[#87CEEB] to-[#FF8C69] animate-gradient-x;
+  }
+  
+  .gradient-title-alt {
+    @apply font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C69] via-[#FFCBA4] to-[#30BFBF] animate-gradient-x;
+  }
+
+  .card {
+    @apply bg-white bg-opacity-40 backdrop-blur-md overflow-hidden shadow-lg rounded-xl hover:shadow-xl transition-all duration-300 border border-white border-opacity-30;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .card-hover {
+    @apply transform hover:-translate-y-2 transition-transform duration-300;
+  }
+
+  .glass-effect {
+    @apply bg-white bg-opacity-20 backdrop-blur-lg rounded-xl border border-white border-opacity-30 shadow-lg;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .section-title {
+    @apply text-xl font-bold text-[#1C0B19] mb-4 border-b border-[#B8E1FF]/50 pb-2;
+  }
+
+  .form-section {
+    @apply p-6 rounded-lg bg-gradient-to-r from-[#F8F9FA]/80 to-[#E9ECEF]/60 mb-6 shadow-inner backdrop-blur-sm;
+  }
+  
+  .accent-border {
+    @apply border-t-2 border-[#30BFBF];
+  }
+  
+  .accent-dot {
+    @apply bg-gradient-to-r from-[#30BFBF] to-[#87CEEB] rounded-full;
+  }
+  
+  .highlight-text {
+    @apply text-[#FF8C69] font-semibold;
+  }
+  
+  .subtle-text {
+    @apply text-[#1C0B19]/70;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 8s ease infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E9ECEF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #CED4DA, #DEE2E6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #CED4DA/90, #DEE2E6/90);
+}
+
+/* Decorative elements */
+.bg-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23CED4DA' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.turquoise-glass {
+  @apply bg-[#30BFBF] bg-opacity-20 backdrop-blur-md border border-[#30BFBF]/30;
+  background-color: rgba(48, 191, 191, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 191, 191, 0.2);
+}
+
+.sky-glass {
+  @apply bg-[#87CEEB] bg-opacity-20 backdrop-blur-md border border-[#87CEEB]/30;
+  background-color: rgba(135, 206, 235, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(135, 206, 235, 0.2);
+}
+
+.pale-glass {
+  @apply bg-[#B8E1FF] bg-opacity-40 backdrop-blur-md border border-[#B8E1FF]/30;
+}
+
+.peach-glass {
+  @apply bg-[#FFCBA4] bg-opacity-20 backdrop-blur-md border border-[#FFCBA4]/30;
+  background-color: rgba(255, 203, 164, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 203, 164, 0.2);
+}
+
+.coral-glass {
+  @apply bg-[#FF8C69] bg-opacity-20 backdrop-blur-md border border-[#FF8C69]/30;
+  background-color: rgba(255, 140, 105, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 140, 105, 0.2);
+}
+
+.dark-glass {
+  @apply bg-[#1C0B19] bg-opacity-90 backdrop-blur-md text-white;
+  background-color: rgba(28, 11, 25, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sea-glass {
+  @apply bg-[#30BFBF] bg-opacity-20 backdrop-blur-md border border-[#30BFBF]/30;
+  background-color: rgba(0, 145, 110, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 145, 110, 0.2);
+}
+
+.blue-glass {
+  @apply bg-[#B8E1FF] bg-opacity-40 backdrop-blur-md border border-[#B8E1FF]/30;
+  background-color: rgba(172, 215, 236, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(172, 215, 236, 0.2);
+}
+
+.gold-glass {
+  @apply bg-[#FFF8DC] bg-opacity-20 backdrop-blur-md border border-[#FFF8DC]/30;
+}
+
+.neutral-glass {
+  @apply bg-[#F8F9FA] bg-opacity-40 backdrop-blur-md border border-[#DEE2E6]/30;
+  background-color: rgba(248, 249, 250, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(222, 226, 230, 0.3);
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, #30BFBF, #87CEEB, #FFCBA4, #FF8C69);
+  border-radius: 2px 2px 0 0;
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(30deg); }
+  100% { transform: translateX(100%) rotate(30deg); }
+} 
